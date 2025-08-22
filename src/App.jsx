@@ -129,7 +129,7 @@ function App() {
         {isNodeSelected ? (
           <div>
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Settings</h2>
+              <h2 className="text-xl font-semibold">Message</h2>
               <button
                 className="text-gray-500 hover:text-gray-800"
                 onClick={() => setSelectedNode(null)}
@@ -137,7 +137,7 @@ function App() {
                 &times;
               </button>
             </div>
-            <label className="block text-gray-700 mb-2">Message Text</label>
+            <label className="block text-gray-700 mb-2"></label>
             <textarea
               className="w-full h-32 p-2 border rounded-md"
               value={selectedNode.data.label}
@@ -146,7 +146,7 @@ function App() {
           </div>
         ) : (
           <div>
-            <h2 className="text-xl font-semibold mb-4">Nodes Panel</h2>
+            <h2 className="text-xl font-semibold mb-4"></h2>
             <div
               className="bg-white border-2 border-blue-500 rounded-lg p-3 text-center cursor-grab"
               onDragStart={(event) => onDragStart(event, 'sendMessage')}

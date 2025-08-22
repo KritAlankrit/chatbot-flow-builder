@@ -1,12 +1,26 @@
-# React + Vite
+# Flow Builder App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and interactive web application for building and visualizing node-based flows. This project serves as a foundation for more complex workflow automation or chatbot design tools.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Features
 
-## Expanding the ESLint configuration
+* **Drag & Drop Nodes**: Easily add "Send Message" nodes to the canvas by dragging them from the side panel.
+* **Real-time Editing**: Select any node to open the settings panel and edit its message content in real-time.
+* **Interactive Edges**: Connect nodes by dragging a line from a source handle to a target handle. Each node can have only one outgoing edge.
+* **Validation**: The "Save Flow" button validates the flow, ensuring that all nodes are connected before allowing you to save.
+* **Custom Notifications**: Get clear, styled pop-up messages for both successful saves and validation errors.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+### Technologies Used
+
+* **HTML & CSS**: For the basic structure and styling.
+* **Tailwind CSS**: A utility-first CSS framework for rapid and responsive UI development.
+* **React**: A JavaScript library for building the user interface.
+* **React Flow**: A powerful library for creating node-based editors and graphs.
+
+---
+
+### Live link: https://chatbot-flow-builder-nine-cyan.vercel.app/

@@ -9,6 +9,7 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import SendMessageNode from './components/SendMessageNode';
+import Notification from './components/Notification';
 
 const initialNodes = [
   {
@@ -27,8 +28,9 @@ function App() {
   const reactFlowWrapper = useRef(null);
   const { screenToFlowPosition } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [edges, setEdges, onEdgesState] = useEdgesState(initialEdges);
   const [selectedNode, setSelectedNode] = useState(null);
+  const [notification, setNotification] = useState(null);
 
   const onConnect = useCallback((params) => {
     setEdges((eds) => addEdge(params, eds));
@@ -83,6 +85,10 @@ function App() {
     );
     setSelectedNode((prev) => ({ ...prev, data: { ...prev.data, label: value } }));
   };
+
+  const handleCloseNotification = () => {
+    setNotification(null);
+  };
   
   const saveFlow = () => {
     const connectedNodeIds = new Set();
@@ -94,16 +100,21 @@ function App() {
     const unconnectedNodes = nodes.filter(node => !connectedNodeIds.has(node.id));
 
     if (unconnectedNodes.length > 0) {
-      alert('Error: Please connect all nodes before saving the flow.');
+      setNotification({
+        message: 'Error: Please connect all nodes before saving the flow.',
+        type: 'error',
+      });
     } else {
-      alert('Success: Flow saved!');
+      setNotification({
+        message: 'Success: Flow saved!',
+        type: 'success',
+      });
       console.log('Flow saved:', { nodes, edges });
     }
   };
 
   const isNodeSelected = selectedNode && Object.keys(selectedNode).length > 0;
   
-  // This is the new validation logic for single-edge source
   const isValidConnection = (connection) => {
     const isSourceConnected = edges.some(
       (edge) => edge.source === connection.source
@@ -160,7 +171,7 @@ function App() {
             nodes={nodes}
             edges={edges}
             onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
+            onEdgesChange={onEdgesState}
             onConnect={onConnect}
             nodeTypes={nodeTypes}
             onNodeClick={onNodeClick}
@@ -171,6 +182,15 @@ function App() {
           />
         </div>
       </main>
+
+      {/* Notification pop-up */}
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={handleCloseNotification}
+        />
+      )}
     </div>
   );
 }
